@@ -1,0 +1,163 @@
+
+.zone-detail{
+    margin: 0 auto;
+    width: 80%;
+    position: relative;
+    top: 22%;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-rows: 90%;
+    border: 1px solid orange;
+    
+}
+.zone-detail .left{
+    height: 100%;
+}
+
+.zone-detail .right{
+    height: 100%;
+    width: 100%;   
+}
+
+.left .product img{
+    height: 300px;
+    width: auto;
+    margin: 0 auto;
+    object-fit: cover;
+    transition: all 0.4s;
+
+}
+#main-img:hover{
+transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+
+}
+
+.left .miniature{
+    background-color: white;
+    width: 98%;
+    height: 100px;
+    margin: 0 5px;
+    display: inline-flex;
+    box-shadow: inset 0 -3em 3em rgba(128, 115, 115, 0.1), 0 0 0 1px rgb(255, 255, 255),
+    0.1em 0.1em 0.1em rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+.left .miniature img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.zone-detail .right-header{
+    height: 25%;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    font-size: 115%;
+}
+.zone-detail .right-header p{
+    font-weight: bold;
+    color : #2196f3;
+}
+
+.zone-detail .description{
+    height: 55%;
+    width: 100%;
+    display: inline-flex;
+    overflow: auto;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.zone-action{
+    justify-content: space-around;
+    display: inline-flex;
+    width: 100%;
+    height: 9%;
+}
+.zone-action button{
+    background-color: darkslateblue;
+    font-weight: bold;
+    color: aliceblue;
+    border-radius: 5px;
+    width: 120px;
+    margin: 0px 5px;
+    transition: 0.5s;
+    font-size: 100%;
+}
+.zone-action button:hover{
+    background-color:#2196f3!important;
+}
+
+.footer{
+    margin-top: 2%;
+    position: relative;
+    top: 95%;
+}
+
+
+@media (max-width : 909px) {
+    
+    .zone-detail{
+        margin: 0 auto;
+        width: 80%;
+        position: relative;
+        top: 30%;
+        height: 500px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40% 60%;
+    }
+    .left .product img{
+        height: 140px;
+        width: auto;
+        margin: 0 auto;
+    }
+    .left .miniature img{
+        width: 100%;
+        height: 60%;
+        display: inline-flex;
+
+    }
+    .zone-action{
+        height: 15%;
+        margin-top: 5px;
+    }
+    .barre-menu ul li a {
+        font-size: 25px;
+        color: white;
+    
+    }
+    
+    
+    
+    
+     
+}
+/* Mobile screen adaptation*/
+@media(max-width: 600px) {
+
+    .zone-detail{
+        margin: 0 auto;
+        width: 90%;
+        position: relative;
+        top: 20%;
+        height: 500px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40% 60%;
+    } 
+    .left {
+       border: 2px solid red;
+    }
+    .right{
+        border: 2px solid rgb(16, 50, 198);
+
+    }
+    .left .miniature{
+        height: 50px;
+    }
+    .left .miniature img{
+        height: 100%;
+    }
+        
+}

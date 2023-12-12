@@ -1,0 +1,47 @@
+.example-full-width {
+  width: 100%;
+}
+.custom-cursor:hover {
+  cursor: pointer;
+}
+
+.header {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.header .img-container img {
+  height: 120px;
+  width: 100%;
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.my-card {
+  display: flex;
+  flex-direction: column; /* Alignement vertical des éléments */
+  justify-content: center; /* Centre les éléments verticalement */
+  align-items: center;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.06); /* Centre les éléments horizontalement */
+}
+.centered-title {
+  text-align: center; /* Centrer le texte horizontalement */
+}
+.phone-input-container {
+  display: flex;
+  flex-direction: row;
+}
+.phone-input-container .mat-form-field {
+  margin-right: 10px;
+  flex: 1;
+}
+.submit-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}

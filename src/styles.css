@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+:root {
+  /* Couleurs */
+  --primary-color: #007bff;
+  --secondary-color: #e6f1f9;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --warning-color: #ffc107;
+
+  /* Tailles de police */
+  --base-font-size: 16px;
+  --heading-font-size: 24px;
+
+  /* Espacements */
+  --padding-small: 8px;
+  --padding-medium: 16px;
+  --padding-large: 24px;
+
+  /* Bordures */
+  --border-width: 1px;
+  --border-radius: 4px;
+
+  /* Temps d'animation */
+  --animation-duration: 0.3s;
+}
+
+@import "~@fortawesome/fontawesome-free/css/all.css";

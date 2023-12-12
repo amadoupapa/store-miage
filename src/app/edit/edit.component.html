@@ -1,0 +1,86 @@
+<div class="container p-0 w-100">
+  <div class="row">
+    <h1 class="centered-title">Vos informations</h1>
+    <form class="example-form" (ngSubmit)="saveChanges()">
+      <div class="header">
+        <div class="card my-card">
+          <div class="card-header rounded-circle">
+            <div class="img-container position-relative">
+              <img
+                class="avatar"
+                src="../assets/profile-pic.png"
+                alt="Profile Picture"
+              />
+            </div>
+          </div>
+          <div class="form-group m-3">
+            <!-- <div class="custom-file">
+              <input
+                type="file"
+                class="custom-file-input"
+                id="inputGroupFile01"
+              />
+            </div> -->
+            <app-choose-modal></app-choose-modal>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label>Nom complet</label>
+        <input
+          class="form-control"
+          [(ngModel)]="businessCard.name"
+          name="name"
+          value="{{ businessCard.name }}"
+        />
+      </div>
+      <div class="form-group mb-2">
+        <label>Profession</label>
+        <input
+          class="form-control"
+          [(ngModel)]="businessCard.jobTitle"
+          value="{{ businessCard.jobTitle }}"
+          name="jobTitle"
+        />
+      </div>
+      <div class="form-group mb-2">
+        <label>Description</label>
+        <textarea
+          class="form-control"
+          rows="5"
+          [(ngModel)]="businessCard.description"
+          value="{{ businessCard.description }}"
+          name="description"
+        ></textarea>
+      </div>
+      <div class="phone-input-container">
+        <div class="form-group mb-2">
+          <label>Indicatif</label>
+          <select
+            class="form-control"
+            [(ngModel)]="businessCard.countryCode"
+            name="countryCode"
+          >
+            <option *ngFor="let ccode of countryCodes" [value]="ccode.code">
+              {{ ccode.code }}
+            </option>
+            <!-- Ajoutez d'autres options d'indicatif selon vos besoins -->
+          </select>
+        </div>
+        <div class="form-group mb-2">
+          <label>Numéro de téléphone</label>
+          <input
+            [(ngModel)]="businessCard.phoneNumber"
+            class="form-control"
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+            type="tel"
+            name="phone"
+          />
+        </div>
+      </div>
+      <button class="btn btn-primary text-center btn-block w-100" type="submit">
+        Enregistrer
+      </button>
+    </form>
+  </div>
+</div>

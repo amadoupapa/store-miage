@@ -1,0 +1,28 @@
+<button type="button" class="btn btn-primary" (click)="openModal()">
+  Modifier votre photo
+</button>
+
+<ng-template #fileUploadModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Sélectionner un fichier</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('cancel')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="saveFile(modal)">
+      Enregistrer
+    </button>
+    <button class="btn btn-secondary" (click)="modal.dismiss('cancel')">
+      Annuler
+    </button>
+  </div>
+</ng-template>
