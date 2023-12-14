@@ -1,16 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+  styleUrls: ['./product-card.component.css'],
 })
-export class ProductCardComponent {
-  @Input()
-   prix!:string;
-  @Input()
-   img_url!:string;
-  @Input()
-   titre!:string;
+export class ProductCardComponent implements OnInit {
+  constructor() {}
 
+  ngOnInit(): void {
+    this.image_src = 'data:' + this.image_type + ';base64,' + this.image_url;
+  }
+  @Input()
+  id!:number;
+  @Input()
+  prix!: number;
+  @Input()
+  image_url!: string;
+  @Input()
+  image_type!: string;
+  @Input()
+  titre!: string;
+  image_src!: string;
 }

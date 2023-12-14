@@ -1,0 +1,78 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div
+        class="col-md-8 form d-flex flex-column justify-content-center align-items-center"
+      >
+        <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()">
+          <h1 class="headind">Se connecter</h1>
+          <div class="mb-3">
+            <label for="" class="form-label">Login</label>
+            <input
+              type="texte"
+              class="form-control"
+              id="login"
+              formControlName="username"
+              placeholder="Votre login"
+            />
+            <div
+              *ngIf="
+                loginForm.get('username')!.hasError('required') &&
+                loginForm.get('username')!.touched
+              "
+              class="text-danger"
+            >
+              Le login est requis.
+            </div>
+            <div
+              *ngIf="
+                loginForm.get('username')!.hasError('username') &&
+                loginForm.get('username')!.touched
+              "
+              class="text-danger"
+            >
+              Veuillez saisir un login valide.
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              placeholder="Votre mot de passe"
+            />
+            <div
+              *ngIf="
+                loginForm.get('password')!.hasError('required') &&
+                loginForm.get('password')!.touched
+              "
+              class="text-danger"
+            >
+              Le mot de passe est requis.
+            </div>
+            <div
+              *ngIf="
+                loginForm.get('password')!.hasError('minlength') &&
+                loginForm.get('password')!.touched
+              "
+              class="text-danger"
+            >
+              Le mot de passe doit avoir au moins 5 caractères.
+            </div>
+          </div>
+          <div class="form-check">
+            <input id="rememberMe" class="form-check-class" type="checkbox" formControlName="rememberMe">
+            <label for="rememberMe">Garder ma session active</label>
+          </div>
+  
+          <button type="submit" class="btn btn-primary">Se connecter</button>
+          <span class="btn ml-3"
+            ><a routerLink="/register">Creer un compte</a></span
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+  

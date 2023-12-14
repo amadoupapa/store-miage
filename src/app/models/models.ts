@@ -4,16 +4,19 @@ export interface Produit {
     id: number;
     nomProduit: string;
     descriptionProduit: string;
-    prixProduit: number;
-    imageProduit: string;
+    prix: number;
+    featured: boolean;
+    imageProduit: Blob;
     idCategorie: number;
   }
 export interface ProduitAll{
     id: number;
     nomProduit: string;
     descriptionProduit: string;
-    prixProduit: number;
+    prix: number;
     imageProduit: string;
+    imageProduitContentType:string
+    featured: boolean;
     categorie: Categorie;
 }
   export interface Client {
@@ -46,6 +49,10 @@ export interface ProduitAll{
     client: Client;
     produit: Produit;
     date_commande: Date;
+  }
+  export interface CreateCommandeDto{
+    client:{id:number};
+    produit:{id:number};
   }
 
 export interface Categorie{
