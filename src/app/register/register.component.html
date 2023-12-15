@@ -1,0 +1,207 @@
+<div class="container mt-5 my-4">
+  <div class="row justify-content-center p-4">
+    <div class="col-md-12 form d-flex flex-column justify-content-center">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1 class="headind text-center">Creation de compte</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="login" class="form-label">login</label>
+              <input
+                type="text"
+                class="form-control"
+                id="login"
+                formControlName="login"
+                placeholder="Votre login"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('login')!.hasError('required') &&
+                  registerForm.get('login')!.touched
+                "
+                class="text-danger"
+              >
+                Le login est requis.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Nom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="lastName"
+                placeholder="Votre nom"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('lastName')!.hasError('required') &&
+                  registerForm.get('lastName')!.touched
+                "
+                class="text-danger"
+              >
+                Le nom est requis.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Prenom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="Votre prenom"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('firstName')!.hasError('required') &&
+                  registerForm.get('firstName')!.touched
+                "
+                class="text-danger"
+              >
+                Le prenom est requis.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="confirmpassword" class="form-label"
+                >Confirmation mot de passe</label
+              >
+              <input
+                type="confirmpassword"
+                class="form-control"
+                id="confirmpassword"
+                formControlName="confirmpassword"
+                placeholder="Confirmation mot de passe"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('confirmpassword')!.hasError('required') &&
+                  registerForm.get('confirmpassword')!.touched
+                "
+                class="text-danger"
+              >
+                Confirmez le mot de passe
+              </div>
+              <div
+                *ngIf="
+                  !(
+                    registerForm.get('confirmpassword')?.value ==
+                    registerForm.get('confirmpassword')?.value
+                  )
+                "
+                class="text-danger"
+              >
+                Mots de passe differents
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Votre email"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('email')!.hasError('required') &&
+                  registerForm.get('email')!.touched
+                "
+                class="text-danger"
+              >
+                L'email est requis.
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('email')!.hasError('email') &&
+                  registerForm.get('email')!.touched
+                "
+                class="text-danger"
+              >
+                Veuillez saisir un email valide.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="telephone" class="form-label">Numero Telephone</label>
+              <input
+                type="text"
+                class="form-control"
+                id="telephone"
+                formControlName="telephone"
+                placeholder="Votre numero de telephone"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('telephone')!.hasError('required') &&
+                  registerForm.get('telephone')!.touched
+                "
+                class="text-danger"
+              >
+                Le numero est requis.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="adresse" class="form-label">Votre adresse</label>
+              <input
+                type="text"
+                class="form-control"
+                id="adresse"
+                formControlName="adresse"
+                placeholder="Votre adresse"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('adresse')!.hasError('required') &&
+                  registerForm.get('adresse')!.touched
+                "
+                class="text-danger"
+              >
+                L'adresse est requis.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Votre mot de passe"
+              />
+              <div
+                *ngIf="
+                  registerForm.get('password')!.hasError('required') &&
+                  registerForm.get('password')!.touched
+                "
+                class="text-danger"
+              >
+                Le mot de passe est requis.
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('password')!.hasError('minlength') &&
+                  registerForm.get('password')!.hasError('pattern') &&
+                  registerForm.get('password')!.touched
+                "
+                class="text-danger"
+              >
+                Le mot de passe doit avoir au moins 8 caractères et au moins 1
+                chiffre.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+        <span class="btn ml-3"><a routerLink="/login">Se connecter</a></span>
+      </form>
+    </div>
+  </div>
+</div>

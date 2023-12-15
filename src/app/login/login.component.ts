@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../config/Authentification/auth.service';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm:FormGroup
+  
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -16,6 +19,10 @@ export class LoginComponent {
       rememberMe: [false],
       password: ['', [Validators.required, Validators.minLength(5)]]
     });
+  }
+
+  ngOnInit(): void {
+    this.authService.clearLocal()
   }
 
   onSubmit() {

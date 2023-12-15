@@ -14,6 +14,8 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { LoginComponent } from './login/login.component';
     ProductsListComponent,
     ProductDetailsComponent,
     LoginComponent,
+    RegisterComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule,HttpClientModule,ReactiveFormsModule],
   providers: [],

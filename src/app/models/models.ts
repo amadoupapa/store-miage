@@ -34,7 +34,7 @@ export interface ProduitAll{
   export interface CreateClientDto{
     adresse: string;
     telephone: string;
-    user:User
+    user:User;
   }
   
 

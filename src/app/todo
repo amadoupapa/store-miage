@@ -1,0 +1,39 @@
+/* import { HttpClient } from '@angular/common/http';
+
+export class MyComponent {
+
+  constructor(private http: HttpClient) {}
+
+  uploadImage() {
+    const file = this.image;
+
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Data = e.target.result;
+      this.http.post('/api/myResource', base64Data).subscribe((response) => {
+        console.log(response);
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+} */
+
+
+/* Ce code utilise le composant FileInput pour charger un fichier image. Le composant FileInput renvoie un objet File qui contient les informations sur le fichier, notamment son nom, son type et sa taille.
+
+La fonction uploadImage() prend en entrée un objet File et utilise le service HttpClient pour envoyer le fichier au serveur. Le serveur reçoit le fichier en base64, ce qui signifie qu'il est représenté sous la forme d'une chaîne de caractères contenant les données binaires du fichier.
+
+Le code HTML pour le composant MyComponent est le suivant :
+
+<h1>Upload d'image</h1>
+
+<div class="container">
+  <input type="file" [(ngModel)]="image" />
+  <button (click)="uploadImage()">Envoyer</button>
+</div>
+ */

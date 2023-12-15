@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { LoginResponse, RegisterDTO, User } from './models';
+import { LoginDTO, LoginResponse, RegisterDTO, RegisterErrorResponse, User } from './models';
 import {
   HttpClient,
+  HttpResponse,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
@@ -9,11 +10,13 @@ import { ClientService } from 'src/app/services/client.service';
 import { ClientAll, CreateClientDto } from 'src/app/models/models';
 import { AppConfig } from '../constants';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  
   private baseUrl = AppConfig.BASE_URL;
   public token = '';
   private headers = new HttpHeaders().set(
@@ -33,7 +36,7 @@ export class AuthService {
   }
 
 
-  constructor(private http: HttpClient, private clientService: ClientService) {}
+  constructor(private http: HttpClient, private clientService: ClientService, private router:Router) {}
   register(registerDto: RegisterDTO, clientDto: CreateClientDto) {
     //CREE D'ABORD UN USER
     this.http
@@ -48,10 +51,15 @@ export class AuthService {
           //CONNECTER DIRECTEMENT USER ET OBTENIR UN TOKEN
           this.login(credential);
           //ENSUITE CREER LE CLIENT AVEC INFO SUPPLEMENTAIRES
-          this.clientService.createClient(clientDto);
+          console.log('creation user reussi ',r);
+          this.clientService.createClient(clientDto,r);
+
+          this.router.navigate(['login'])
+          
         },
-        error(err: HttpErrorResponse) {
-          alert(err.message);
+        error(err) {
+          //alert(err.body);
+          console.log(err);
         },
       });
   }
@@ -70,6 +78,8 @@ export class AuthService {
           this.token = r.id_token;
           this.getUserInfo();
           this.setEtatAuth(true)
+
+          this.router.navigate([''])
           
           //alert('Token' + r.id_token);
         },
@@ -83,9 +93,11 @@ export class AuthService {
       .get<User>(this.baseUrl + '/api/account', { headers: this.headers })
       .subscribe((v) => {
         localStorage.setItem('user_id', v.id.toString());
+        localStorage.setItem('login', v.login.toString());
         localStorage.setItem('username', v.login);
         localStorage.setItem('firstname', v.firstName);
         localStorage.setItem('lastname', v.lastName);
+        alert('login depuis local '+ localStorage.getItem('login'));
         this.getClientByUserId(v.id)
         console.log('info obtenu est ', v);
       });
@@ -99,4 +111,9 @@ export class AuthService {
        console.log('info sur le client est ',v)
     })
   }
+  clearLocal(){
+  localStorage.clear()
+  }
+  
 }
+
