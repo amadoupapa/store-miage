@@ -1,2 +1,21 @@
-<p>products-list works!</p>
-<h1>{{categorie}} c</h1>
+<!-- Section des articles les plus vendus -->
+<section class="container mt-4">
+    <h2 class="mb-4 justify-content-center d-flex"></h2>
+  
+    <!-- Lignes -->
+    <div class="row">
+      <!-- Articles -->
+      <h2 *ngIf="produits.length<1" class="heading text-center">Stock epuise pour cette categorie</h2>
+      <div *ngFor="let p of produits" class="col-md-3 mb-4 mx-4">
+        <app-product-card
+        [id]="p.id"
+          titre="{{ p.nomProduit }}"
+          [prix]="p.prix"
+          [image_url]="p.imageProduit"
+          [image_type]="p.imageProduitContentType"
+        ></app-product-card>
+      </div>
+    </div>
+  
+  </section>
+  

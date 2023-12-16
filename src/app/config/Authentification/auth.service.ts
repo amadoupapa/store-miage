@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { LoginDTO, LoginResponse, RegisterDTO, RegisterErrorResponse, User } from './models';
+import { LoginResponse, RegisterDTO, User, UserDataStorage } from './models';
 import {
   HttpClient,
-  HttpResponse,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
+import { jwtDecode } from 'jwt-decode';
 import { ClientService } from 'src/app/services/client.service';
 import { ClientAll, CreateClientDto } from 'src/app/models/models';
 import { AppConfig } from '../constants';
@@ -16,13 +16,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  
   private baseUrl = AppConfig.BASE_URL;
-  public token = '';
-  private headers = new HttpHeaders().set(
-    'Authorization',
-    `Bearer ${localStorage.getItem('token')}`
-  );
+
+  public userData!: UserDataStorage;
+  public estAdmin = false;
+
   //Observable pour partager etat de connexion du user
   private estSujetConnecte = new BehaviorSubject<boolean>(false);
   public estConnecte: Observable<boolean> =
@@ -31,12 +29,28 @@ export class AuthService {
   setEtatAuth(status: boolean) {
     this.estSujetConnecte.next(status);
   }
-  estUserConnecte(): boolean {
-    return this.estSujetConnecte.value;
+
+  initHeaders(token: string) {
+    console.log('le token obtenu sans refresh est ', token);
+    // console.log('init token apres login', this.headers);
+    console.log('le token decode contient ', jwtDecode(token));
+    this.getUserInfo(token);
   }
 
+  //Observable pour partager role  user
+  private estDeconnecteSujet = new BehaviorSubject<boolean>(false);
+  public estDeconnecte: Observable<boolean> =
+    this.estDeconnecteSujet.asObservable();
 
-  constructor(private http: HttpClient, private clientService: ClientService, private router:Router) {}
+  setEtatDeconnexion(status: boolean) {
+    this.estDeconnecteSujet.next(status);
+  }
+
+  constructor(
+    private http: HttpClient,
+    private clientService: ClientService,
+    private router: Router
+  ) {}
   register(registerDto: RegisterDTO, clientDto: CreateClientDto) {
     //CREE D'ABORD UN USER
     this.http
@@ -51,11 +65,10 @@ export class AuthService {
           //CONNECTER DIRECTEMENT USER ET OBTENIR UN TOKEN
           this.login(credential);
           //ENSUITE CREER LE CLIENT AVEC INFO SUPPLEMENTAIRES
-          console.log('creation user reussi ',r);
-          this.clientService.createClient(clientDto,r);
+          console.log('creation user reussi ', r);
+          this.clientService.createClient(clientDto, r);
 
-          this.router.navigate(['login'])
-          
+          this.router.navigate(['login']);
         },
         error(err) {
           //alert(err.body);
@@ -75,45 +88,91 @@ export class AuthService {
         next: (r) => {
           localStorage.setItem('token', r.id_token);
 
-          this.token = r.id_token;
-          this.getUserInfo();
-          this.setEtatAuth(true)
+          this.initHeaders(r.id_token);
 
-          this.router.navigate([''])
-          
+          this.setEtatAuth(true);
+          //stockage data user
+          this.router.navigate(['']);
+          //  this.getUserInfo(r.id_token);
+
           //alert('Token' + r.id_token);
         },
+
         error(err: HttpErrorResponse) {
           alert(err.message);
         },
       });
   }
-  getUserInfo() {
+  logout() {
+    if (confirm('Confirmez la deconnexion')) {
+      this.clearLocal();
+      localStorage.clear();
+      this.setEtatAuth(false);
+      this.router.navigate(['']);
+    }
+  }
+
+  getUserInfo(token: string) {
+    var v_headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
     return this.http
-      .get<User>(this.baseUrl + '/api/account', { headers: this.headers })
+      .get<User>(this.baseUrl + '/api/account', { headers: v_headers })
       .subscribe((v) => {
         localStorage.setItem('user_id', v.id.toString());
         localStorage.setItem('login', v.login.toString());
         localStorage.setItem('username', v.login);
         localStorage.setItem('firstname', v.firstName);
         localStorage.setItem('lastname', v.lastName);
-        alert('login depuis local '+ localStorage.getItem('login'));
-        this.getClientByUserId(v.id)
-        console.log('info obtenu est ', v);
+        this.getClientByUserId(v.id, v_headers);
+        console.log('toutes les infos obtenues sont ', v);
+        v.authorities.forEach((r) => {
+          if (r.valueOf() == 'ROLE_ADMIN') {
+            this.estAdmin = true;
+            alert('Connecte en tant que admin');
+          }
+        });
+        this.setEtatAuth(true);
+        this.userData = {
+          token: token,
+          user_id: v.id,
+          login: v.login,
+          firstname: v.firstName,
+          lastname: v.lastName,
+          estAdmin: this.estAdmin,
+        };
+        localStorage.setItem('userData', JSON.stringify(this.userData));
+        console.log(
+          'le vrai localstorage de userData stocke est :',
+          localStorage.getItem('userData')
+        );
       });
+  }
 
- 
+  getClientByUserId(user_id: number, v_headers: HttpHeaders) {
+    return this.http
+      .get<ClientAll>(this.baseUrl + '/api/clients/user/' + user_id, {
+        headers: v_headers,
+      })
+      .subscribe((v) => {
+        localStorage.setItem('client_id', v.id.toString());
+        console.log('info sur le client est ', v);
+      });
   }
-  
-  getClientByUserId(user_id:number){
-    return this.http.get<ClientAll>(this.baseUrl+'/api/clients/user/'+user_id,{headers:this.headers}).subscribe((v)=>{
-      localStorage.setItem('client_id',v.id.toString())
-       console.log('info sur le client est ',v)
-    })
+  checkAuth() {
+    if (localStorage.getItem('userData')) {
+      return this.setEtatAuth(true);
+    }
+    this.router.navigate([''])
+    return this.setEtatAuth(false);
+    
   }
-  clearLocal(){
-  localStorage.clear()
+  parseUserData(data: string | null) {
+    var parsed: UserDataStorage;
+    if (data) return (parsed = JSON.parse(data));
+    alert('User data not found');
   }
-  
+
+  clearLocal() {
+    localStorage.clear();
+  }
 }
-

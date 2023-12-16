@@ -7,21 +7,27 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CommandeComponent } from './commande/commande.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: '**', component: NotFoundComponent },
+  
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   
   {
-    path: 'liste-produits/:categorie',
+    path: 'liste-produits/categorie/:categorie_id',
     component: ProductsListComponent,
   },
   {
     path: 'details-produit/:id',
     component: ProductDetailsComponent,
   },
+  {
+    path: 'mes-commandes',
+    component: CommandeComponent,
+  },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

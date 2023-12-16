@@ -5,7 +5,9 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  Categorie,
   ClientAll,
+  CommandeAll,
   CreateClientDto,
   CreateCommandeDto,
   ProduitAll,
@@ -21,6 +23,7 @@ export class ClientService {
   private headers = new HttpHeaders().set(
     'Authorization',
     `Bearer ${localStorage.getItem('token')}`
+    
   );
 
   constructor(private http: HttpClient) {}
@@ -50,9 +53,17 @@ export class ClientService {
     return this.http.get<ProduitAll[]>(`${this.url}/api/produits/featured`);
   }
   getProduct(id: string) {
-    return this.http.get<ProduitAll>(`${this.url}/api/produits/${id}`, {
-      headers: this.headers,
-    });
+    return this.http.get<ProduitAll>(`${this.url}/api/produits/${id}`, 
+    );
+  }
+
+  getProductsByCategorie(categorie_id:string | null) {
+    return this.http.get<ProduitAll[]>(`${this.url}/api/produits/categorie/${categorie_id}`)
+    
+  }
+
+  getCategories(){
+    return this.http.get<Categorie[]>(`${this.url}/api/categories`)
   }
 
   commander(data: CreateCommandeDto) {
@@ -61,5 +72,10 @@ export class ClientService {
       data,
       { headers: this.headers }
     );
+  }
+
+  getCommandesByClient(client_id:string){
+    //console.log('hede de commandes',this.headers);
+    return this.http.get<CommandeAll[]>(`${this.url}/api/commandes/client/${client_id}`,{headers:this.headers})
   }
 }

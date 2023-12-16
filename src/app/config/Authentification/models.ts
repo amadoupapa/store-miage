@@ -33,6 +33,7 @@ export interface User {
   lastModifiedBy: string;
   lastModifiedDate: string;
   resetDate: string;
+  authorities: string[]
 }
 
 export interface RegisterErrorResponse {
@@ -50,4 +51,13 @@ export interface RegisterErrorResponse {
       message: string;
     }
   ];
+}
+
+export interface UserDataStorage{
+  token: string,
+          user_id: number,
+          login: string,
+          firstname: string,
+          lastname: string,
+          estAdmin: boolean,
 }

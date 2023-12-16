@@ -1,0 +1,45 @@
+<p>commande works!</p>
+<div class="col-12">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="d-flex flex-row">
+          <h1 class="heading">Liste de mes commandes</h1>
+          
+          
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom Produit</th>
+          <th>Prix</th>
+          <th>Date commande</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of commandes">
+          <td>{{ c.id }}</td>
+          <td>{{ c.produit.nomProduit }}</td>
+          <td>{{ c.produit.prix }}</td>
+          <td>{{ c.dateCommande | date:'medium' }}</td>
+          <td>
+            
+            <div class="row">
+        
+              <div class="col-3">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="deleteCommande(c.id)"
+                >
+                  Supprimmer
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

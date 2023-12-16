@@ -42,13 +42,13 @@ export interface ProduitAll{
     id: number;
     idClient: number;
     idProduit: number;
-    date_commande: Date;
+    dateCommande: Date;
   }
   export interface CommandeAll {
     id: number;
     client: Client;
     produit: Produit;
-    date_commande: Date;
+    dateCommande: Date;
   }
   export interface CreateCommandeDto{
     client:{id:number};
@@ -56,5 +56,7 @@ export interface ProduitAll{
   }
 
 export interface Categorie{
+  id:number
   nomCategorie:string
+
 }

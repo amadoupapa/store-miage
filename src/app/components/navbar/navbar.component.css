@@ -1,0 +1,6 @@
+.active a{
+    font-size: medium;
+    color: var(--secondary-color)!important;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+}
