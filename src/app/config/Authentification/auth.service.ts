@@ -11,6 +11,7 @@ import { ClientAll, CreateClientDto } from 'src/app/models/models';
 import { AppConfig } from '../constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { HeaderComponent } from 'src/app/components/header/header/header.component';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,7 @@ export class AuthService {
   private estDeconnecteSujet = new BehaviorSubject<boolean>(false);
   public estDeconnecte: Observable<boolean> =
     this.estDeconnecteSujet.asObservable();
+    hc!:HeaderComponent 
 
   setEtatDeconnexion(status: boolean) {
     this.estDeconnecteSujet.next(status);
@@ -49,7 +51,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private clientService: ClientService,
-    private router: Router
+    private router: Router,
+   
+    
   ) {}
   register(registerDto: RegisterDTO, clientDto: CreateClientDto) {
     //CREE D'ABORD UN USER
@@ -96,6 +100,7 @@ export class AuthService {
           //  this.getUserInfo(r.id_token);
 
           //alert('Token' + r.id_token);
+          
         },
 
         error(err: HttpErrorResponse) {
@@ -108,6 +113,7 @@ export class AuthService {
       this.clearLocal();
       localStorage.clear();
       this.setEtatAuth(false);
+      
       this.router.navigate(['']);
     }
   }
@@ -156,20 +162,30 @@ export class AuthService {
       .subscribe((v) => {
         localStorage.setItem('client_id', v.id.toString());
         console.log('info sur le client est ', v);
+        console.log('id client ' + localStorage.getItem('client_id'));
       });
   }
   checkAuth() {
     if (localStorage.getItem('userData')) {
-      return this.setEtatAuth(true);
+      this.setEtatAuth(true);
+      return this.estConnecte;
     }
-    this.router.navigate([''])
-    return this.setEtatAuth(false);
-    
+    this.router.navigate(['']);
+    this.setEtatAuth(false);
+    return this.estConnecte;
   }
+  checkToken() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    this.router.navigate(['']);
+    return false;
+  }
+
   parseUserData(data: string | null) {
     var parsed: UserDataStorage;
     if (data) return (parsed = JSON.parse(data));
-    alert('User data not found');
+    //alert('User data not found');
   }
 
   clearLocal() {

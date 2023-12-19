@@ -1,7 +1,13 @@
 .card-title{
-    font-size: medium;
+    font-weight: normal;
 }
 img{
     object-fit: contain;
    
+    max-height: 170px;
+    
+   
+}
+.card{
+    max-height: 300px;
 }

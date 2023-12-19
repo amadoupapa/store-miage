@@ -9,9 +9,7 @@ import { ClientService } from '../services/client.service';
   styleUrls: ['./commande.component.css']
 })
 export class CommandeComponent implements OnInit {
-deleteCommande(arg0: number) {
-throw new Error('Method not implemented.');
-}
+
   estConnecte = false;
   client_id! : string | null
   commandes!:CommandeAll[];
@@ -27,5 +25,18 @@ ngOnInit(): void {
   }
   
 }
+
+deleteCommande(id: number) {
+  if(confirm('Confirmer la suppression')){
+    this.clientservice.deleteCommande(id).subscribe({
+      next:(value)=> {
+        alert('Suppression reussie');
+        this.ngOnInit()
+      },error(err) {
+        alert('Une erreur est survenue');
+      },
+    })
+  }
+  }
 
 }

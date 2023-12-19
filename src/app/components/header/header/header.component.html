@@ -1,4 +1,4 @@
-<div *ngIf="!loginPage" class="row">
+<div *ngIf="!loginPage" class="row position-fixed w-100 " style="z-index: 1030;">
   <div class="d-flex p-2 flex-rows justify-content-between bg-primary text-white">
     <div routerLink="" class="navbar-brand px-4" style="cursor: pointer;">Zig-shop</div>
     <div *ngIf="!estConnecte" class="d-flex flex-rows justify-content-between">
@@ -6,7 +6,7 @@
       <div routerLink="/register" class="px-2 btn bg-primary text-white">Creer un compte</div>
     </div>
     <div  *ngIf="estConnecte" class="d-flex flex-rows justify-content-between">
-      <div *ngIf="estAdmin" class="px-2 btn btn-primary">Admnistration</div>
+      <div *ngIf="estAdmin" routerLink="admin/liste-commandes" class="px-2 btn btn-primary">Admnistration</div>
       <div *ngIf="estConnecte" routerLink="/mes-commandes" class="px-2 btn btn-primary">Mes commandes</div>
       <div class="px-2 py-2">| User : {{userData?.login}}</div>
       <div *ngIf="estConnecte" class="px-2 btn btn-primary" (click)="logout()">Se deconnecter</div>

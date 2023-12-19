@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { parsePhoneNumber } from 'libphonenumber-js';
 import { AuthService } from '../config/Authentification/auth.service';
+import { HeaderComponent } from '../components/header/header/header.component';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { AuthService } from '../config/Authentification/auth.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private authservice:AuthService,private router:Router){}
+  constructor(private authservice:AuthService,private router:Router, ){}
   ngOnInit(): void {
     /* this.authservice.estConnecte.subscribe((e)=>{
       if(!e){
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
           
       }
     }) */ //todo 
+    
   }
 
   formatPhoneNumber(phone: string) {

@@ -1,17 +1,18 @@
 <!-- Section des articles les plus vendus -->
-<section class="container mt-4">
+<section class="container mt-4" >
   <h2 class="mb-4 justify-content-center d-flex">Articles les plus vendus</h2>
 
   <!-- Ligne 1 -->
   <div class="row">
     <!-- Article 1 -->
-    <div *ngFor="let p of produits" class="col-md-3 mb-4 mx-4">
+    <div *ngFor="let p of produits" class="col-md-3 mb-4">
       <app-product-card
       [id]="p.id"
         titre="{{ p.nomProduit }}"
         [prix]="p.prix"
         [image_url]="p.imageProduit"
         [image_type]="p.imageProduitContentType"
+       
       ></app-product-card>
     </div>
   </div>

@@ -1,0 +1,33 @@
+<div class="col-12">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="d-flex flex-row">
+          <h1 class="heading">Liste des commandes</h1>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom Produit</th>
+            <th>Nom Client</th>
+            <th>Prenom Client</th>
+            <th>Telephone</th>
+            <th>Date commande</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of commandes" >
+            <td>{{ c.id }}</td>
+            <td>{{ c.produit.nomProduit }}</td>
+            <td>{{ c.client.user.firstName }}</td>
+            <td>{{ c.client.user.lastName }}</td>
+            <td>{{ c.client.telephone }}</td>
+            <td>{{ c.dateCommande | date : "medium" }}</td>
+            <td><button (click)="deleteCommande(c.id)" class="btn btn-danger">Supprimmer</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

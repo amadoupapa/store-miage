@@ -8,7 +8,7 @@
       <!-- Nom de l'article, prix, description et bouton AJOUTER -->
       <div class="col-md-6">
         <h2>{{produit.nomProduit | uppercase }}</h2>
-        <h4>Prix : FCFA {{produit.prix}} </h4>
+        <h4>Prix : FCFA {{produit.prix | number:'1.2-2'}} </h4>
         <p>Description de l'article Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   
         <!-- Bouton AJOUTER -->

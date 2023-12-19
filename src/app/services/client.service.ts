@@ -19,6 +19,9 @@ import { User } from '../config/Authentification/models';
   providedIn: 'root',
 })
 export class ClientService {
+  deleteCommande(id: number) {
+   return this.http.delete(`${this.url}/api/commandes/${id}`,{headers:this.headers});
+  }
   url = AppConfig.BASE_URL;
   private headers = new HttpHeaders().set(
     'Authorization',
@@ -67,6 +70,7 @@ export class ClientService {
   }
 
   commander(data: CreateCommandeDto) {
+    data.dateCommande = new Date().toISOString()
     return this.http.post<CreateCommandeDto>(
       `${this.url}/api/commandes`,
       data,

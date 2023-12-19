@@ -8,9 +8,16 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CommandeComponent } from './commande/commande.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ListeCommandesComponent } from './admin/liste-commandes/liste-commandes.component';
+import { ListeProduitsComponent } from './admin/liste-produits/liste-produits.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'admin', component: DashboardComponent,children:[
+    {path:'liste-commandes',component:ListeCommandesComponent},
+    {path:'liste-produits',component:ListeProduitsComponent}
+  ] },
   
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

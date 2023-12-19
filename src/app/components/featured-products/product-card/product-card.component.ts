@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-card',
@@ -11,9 +10,12 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.image_src = 'data:' + this.image_type + ';base64,' + this.image_url;
+   
+   
+   
   }
   @Input()
-  id!:number;
+  id!: number;
   @Input()
   prix!: number;
   @Input()
@@ -23,4 +25,5 @@ export class ProductCardComponent implements OnInit {
   @Input()
   titre!: string;
   image_src!: string;
+ 
 }

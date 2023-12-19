@@ -39,6 +39,7 @@ export class ProductDetailsComponent implements OnInit {
       this.data = {
         client: { id: 0 }, 
         produit: { id: 0 }, 
+        dateCommande:''
       };
     });
     this.authservice.estConnecte.subscribe(v=>{

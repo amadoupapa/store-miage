@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="heading">Liste des produits</h1>
+
+    <div class="d-flex flex-row justify-content-between">
+      <div class="col-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Categorie</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of produits">
+              <td>{{ p.id }}</td>
+              <td>{{ p.nomProduit }}</td>
+              <td>{{ p.prix }}</td>
+              <td>{{ p.categorie?.nomCategorie }}</td>
+             
+              
+              <td><img [src]="'data:' + p.imageProduitContentType+ ';base64,' + p.imageProduit" class="img-fluid" style="height: 36px;" ></td>
+
+              <div class="row">
+                <div class="col-4">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="deleteProduits(p.id)"
+                  >
+                    Supprimmer
+                  </button>
+                </div>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-4 mx-2 shadow-sm">
+        <app-ajouter-produit></app-ajouter-produit>
+      </div>
+    </div>
+  </div>
+</div>
