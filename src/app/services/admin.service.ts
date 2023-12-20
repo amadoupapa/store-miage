@@ -61,4 +61,15 @@ export class AdminService  {
       headers: this.headers
     });
   }
+
+  createCategorie(data:{nomCategorie:string}){
+    return this.http.post(`${this.url}/api/categories`,data, {
+      headers: this.headers
+    });
+  }
+  deleteCategorie(id:number){
+    return this.http.delete(`${this.url}/api/categories/${id}`, {
+      headers: this.headers
+    });
+  }
 }

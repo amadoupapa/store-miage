@@ -1,8 +1,8 @@
 <div class="container mt-4">
     <div class="row">
       <!-- Image descriptive -->
-      <div class="col-md-6">
-        <img [src]="image_src" class="img-fluid">
+      <div class="col-md-6 d-flex justify-content-center bg-white">
+        <img [src]="image_src" class="img-fluid h-50 my-3">
       </div>
   
       <!-- Nom de l'article, prix, description et bouton AJOUTER -->
@@ -12,7 +12,7 @@
         <p>Description de l'article Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   
         <!-- Bouton AJOUTER -->
-        <button  (click)="commander()" class="btn btn-primary">COMMANDER</button>
+        <button  (click)="commander()" class="btn btn-primary"><i class="fa fa-cart-shopping mx-1"></i>COMMANDER</button>
       </div>
     </div>
   </div>

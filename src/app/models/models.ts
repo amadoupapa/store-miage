@@ -7,7 +7,7 @@ export interface Produit {
   prix: number;
   featured: boolean;
   imageProduit: Blob;
-  idCategorie: number;
+  idCategorie?: number;
 }
 export interface ProduitAll {
   id: number;
@@ -17,7 +17,7 @@ export interface ProduitAll {
   imageProduit: string;
   imageProduitContentType: string;
   featured: boolean;
-  categorie: Categorie | null;
+  categorie?: Categorie | null;
 }
 export interface Client {
   id: number;
@@ -56,7 +56,7 @@ export interface CreateCommandeDto {
 }
 
 export interface Categorie {
-  id: number;
+  id: number 
   nomCategorie: string ;
 }
 

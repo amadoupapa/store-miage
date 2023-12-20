@@ -1,9 +1,8 @@
 <div class="container-fluid">
   <div class="row">
-    <h1 class="heading">Liste des produits</h1>
-
-    <div class="d-flex flex-row justify-content-between">
-      <div class="col-8">
+    <div class="col-md-8">
+      <h1 class="heading">Liste des produits</h1>
+      <div class="col-12">
         <table class="table">
           <thead>
             <tr>
@@ -21,9 +20,19 @@
               <td>{{ p.nomProduit }}</td>
               <td>{{ p.prix }}</td>
               <td>{{ p.categorie?.nomCategorie }}</td>
-             
-              
-              <td><img [src]="'data:' + p.imageProduitContentType+ ';base64,' + p.imageProduit" class="img-fluid" style="height: 36px;" ></td>
+
+              <td>
+                <img
+                  [src]="
+                    'data:' +
+                    p.imageProduitContentType +
+                    ';base64,' +
+                    p.imageProduit
+                  "
+                  class="img-fluid"
+                  style="height: 36px"
+                />
+              </td>
 
               <div class="row">
                 <div class="col-4">
@@ -40,9 +49,8 @@
           </tbody>
         </table>
       </div>
-      <div class="col-4 mx-2 shadow-sm">
-        <app-ajouter-produit></app-ajouter-produit>
-      </div>
     </div>
+
+    <div class="col-md-4"><app-ajouter-produit></app-ajouter-produit></div>
   </div>
 </div>

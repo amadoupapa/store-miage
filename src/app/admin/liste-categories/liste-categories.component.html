@@ -1,0 +1,47 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="col-12 mb-3">
+        <div class="d-flex flex-row">
+          <h1 class="heading">Liste des Categoties</h1>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nomt</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of categories">
+            <td>{{ c.id }}</td>
+            <td>{{ c.nomCategorie }}</td>
+
+            <td>
+              <button (click)="deleteCategorie(c.id)" class="btn btn-danger">
+                Supprimmer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h1>Ajouter ici</h1>
+      <form #ajoutForm="ngForm" (ngSubmit)="ajouterCategorie(ajoutForm)">
+       
+      
+        <div class="form-group">
+          <label for="nomCategorie">Nom Categorie*</label>
+          <input type="text" class="form-control" id="nomCategorie" name="nomCategorie" [(ngModel)]="nomCategorie" required="">
+        </div>
+      
+       
+      
+        <button type="submit" class="btn btn-primary w-100 text-center">Ajouter</button>
+      </form>
+    </div>
+  </div>
+</div>

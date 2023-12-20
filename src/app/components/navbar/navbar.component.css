@@ -4,3 +4,6 @@
     background-color: var(--primary-color);
     border-radius: var(--border-radius);
 }
+a:hover{
+    color: var(--primary-color);
+}

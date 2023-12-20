@@ -22,6 +22,8 @@ import { ListeProduitsComponent } from './admin/liste-produits/liste-produits.co
 import { SousMenuComponent } from './admin/sous-menu/sous-menu.component';
 import { ListeCommandesComponent } from './admin/liste-commandes/liste-commandes.component';
 import { AjouterProduitComponent } from './admin/liste-produits/ajouter-produit/ajouter-produit.component';
+import { ListeCategoriesComponent } from './admin/liste-categories/liste-categories.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { AjouterProduitComponent } from './admin/liste-produits/ajouter-produit/
     ListeProduitsComponent,
     SousMenuComponent,
     ListeCommandesComponent,
-    AjouterProduitComponent
+    AjouterProduitComponent,
+    ListeCategoriesComponent,
+    FooterComponent
 
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule,HttpClientModule,ReactiveFormsModule],

@@ -11,7 +11,7 @@ import { ClientAll, CreateClientDto } from 'src/app/models/models';
 import { AppConfig } from '../constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HeaderComponent } from 'src/app/components/header/header/header.component';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -38,20 +38,13 @@ export class AuthService {
     this.getUserInfo(token);
   }
 
-  //Observable pour partager role  user
-  private estDeconnecteSujet = new BehaviorSubject<boolean>(false);
-  public estDeconnecte: Observable<boolean> =
-    this.estDeconnecteSujet.asObservable();
-    hc!:HeaderComponent 
-
-  setEtatDeconnexion(status: boolean) {
-    this.estDeconnecteSujet.next(status);
-  }
-
+  
   constructor(
     private http: HttpClient,
     private clientService: ClientService,
     private router: Router,
+    private location:Location
+   
    
     
   ) {}
@@ -73,6 +66,7 @@ export class AuthService {
           this.clientService.createClient(clientDto, r);
 
           this.router.navigate(['login']);
+          
         },
         error(err) {
           //alert(err.body);
@@ -97,14 +91,19 @@ export class AuthService {
           this.setEtatAuth(true);
           //stockage data user
           this.router.navigate(['']);
+         
+          
+          
           //  this.getUserInfo(r.id_token);
 
           //alert('Token' + r.id_token);
           
         },
 
-        error(err: HttpErrorResponse) {
-          alert(err.message);
+        error:(err: HttpErrorResponse)=> {
+          if(err.status==401)
+          alert("Connexion impossible. Verifier vos informations");
+        else alert(err.message);
         },
       });
   }
@@ -115,6 +114,9 @@ export class AuthService {
       this.setEtatAuth(false);
       
       this.router.navigate(['']);
+      location.reload()
+      //recharcher la page pour bien vider les tokens
+
     }
   }
 

@@ -2,22 +2,22 @@
     <h1 class="heading">Ajouter un produit</h1>
     <form #ajoutForm="ngForm" (ngSubmit)="onSubmit(ajoutForm)">
         <div class="form-group">
-          <label for="nomProduit">Nom du Produit</label>
+          <label for="nomProduit">Nom du Produit*</label>
           <input type="text" class="form-control" id="nomProduit" name="nomProduit" [(ngModel)]="nomProduit" required="">
         </div>
       
         <div class="form-group">
-          <label for="descriptionProduit">Description du Produit</label>
+          <label for="descriptionProduit">Description du Produit*</label>
           <textarea class="form-control" id="descriptionProduit" name="descriptionProduit" [(ngModel)]="descriptionProduit" required=""></textarea>
         </div>
       
         <div class="form-group">
-          <label for="prix">Prix</label>
+          <label for="prix">Prix*</label>
           <input type="number" class="form-control" id="prix" name="prix" [(ngModel)]="prix" required="">
         </div>
       
         <div class="form-group">
-          <label for="imageProduit">Image du Produit</label>
+          <label for="imageProduit">Image du Produit*</label>
           <input #imageInput type="file" class="form-control-file" id="imageProduit" name="imageProduit" [(ngModel)]="imageProduit" accept="image/*" (change)="processFile(imageInput)" required="">
         </div>
       
@@ -30,7 +30,7 @@
         </div>
       
         <div class="form-group">
-          <label for="categorie">Catégorie</label>
+          <label for="categorie">Catégorie*</label>
           <select class="form-control" id="categorie" name="categorie" [(ngModel)]="categorie_id">
             <option *ngFor="let category of categories" [value]="category.id">{{ category.nomCategorie }}</option>
           </select>

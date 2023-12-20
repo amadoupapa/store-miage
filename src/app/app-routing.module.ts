@@ -11,12 +11,14 @@ import { CommandeComponent } from './commande/commande.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ListeCommandesComponent } from './admin/liste-commandes/liste-commandes.component';
 import { ListeProduitsComponent } from './admin/liste-produits/liste-produits.component';
+import { ListeCategoriesComponent } from './admin/liste-categories/liste-categories.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: DashboardComponent,children:[
     {path:'liste-commandes',component:ListeCommandesComponent},
-    {path:'liste-produits',component:ListeProduitsComponent}
+    {path:'liste-produits',component:ListeProduitsComponent},
+    {path:'liste-categories',component:ListeCategoriesComponent}
   ] },
   
   { path: 'login', component: LoginComponent },

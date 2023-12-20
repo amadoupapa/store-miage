@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/config/Authentification/auth.service';
 import { UserDataStorage } from 'src/app/config/Authentification/models';
 import { FeaturedProductsComponent } from '../../featured-products/featured-products.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -24,20 +25,27 @@ export class HeaderComponent implements OnInit {
     this.authSub = this.authservice.estConnecte.subscribe({
       next: (v) => {
         this.estConnecte = v;
-
-        this.userData = this.authservice.parseUserData(this.data);
-
+        this.data = localStorage.getItem('userData');
+          this.userData = this.authservice.parseUserData(this.data);
         console.log('donnee user depuis local', this.userData);
         if (this.userData?.estAdmin) this.estAdmin = true;
+        
       },
     });
+    
   }
   //verification route login
   checkRouteLogin() {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.loginPage = this.router.url === '/login'; 
-        if(this.router.url === '/') this.ngOnInit()   
+      
+        if(this.router.url === '/') {
+          setTimeout(() => {
+            this.ngOnInit()
+          }, 1000);
+        }
+       
       }
     });
   }
