@@ -44,9 +44,6 @@ export class RegisterComponent implements OnInit {
       this.dataClient.telephone = this.registerForm.get('telephone')?.value
       this.authService.register(this.dataRegister,this.dataClient)
 
-  
-    
-    
     console.log(this.dataRegister,this.dataClient)
   }
 }
